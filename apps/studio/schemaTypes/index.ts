@@ -2,6 +2,9 @@ import { pageBuilderBlocks } from "@/schemaTypes/blocks/index";
 import { definitions } from "@/schemaTypes/definitions/index";
 import { documents, singletons } from "@/schemaTypes/documents/index";
 
+
+
+
 // Creating a new constant 'schemaTypes' which is a copy of the 'documents' array
 export const schemaTypes = [...documents, ...definitions, ...pageBuilderBlocks];
 

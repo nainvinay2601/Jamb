@@ -12,6 +12,7 @@ import {
   Settings2,
   TrendingUpDown,
   User,
+  Layers
 } from "lucide-react";
 import type {
   StructureBuilder,
@@ -123,6 +124,12 @@ export const structure = (
         title: "FAQs",
         icon: MessageCircle,
       }),
+      //    createList({
+      //   S,
+      //   type: "featureSection",
+      //   title: "Feature Sections",
+      //   icon: Layers,
+      // }),
       createList({ S, type: "author", title: "Authors", icon: User }),
       createList({
         S,

@@ -181,14 +181,65 @@ const featureCardsIconBlock = /* groq */ `
   }
 `;
 
+// =========
+const featureSectionBlock = /* groq */ `
+  _type == "featureSection" => {
+    _type,
+    _key,
+    title,
+    description,
+    ${imageFragment},
+    primaryButton {
+      text,
+      url
+    },
+    secondaryButton {
+      text,
+      url
+    },
+    imagePosition,
+    backgroundColor
+  }
+`;
+
+// ================ 
+const ourLatestSectionBlock = /* groq */ `
+  _type == "ourLatestSection" => {
+    _type,
+    _key,
+    heading,
+    backgroundColor,
+    items[] {
+      _key,
+      title,
+      subtitle,
+      ${imageFragment}
+    }
+  }
+`;
+
+// ============
+const simpleHeroBlock = /* groq */ `
+  _type == "simpleHero" => {
+    _type,
+    _key,
+    ${imageFragment},
+    overlayText,
+    height
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
     _type,
     ${ctaBlock},
+    ${simpleHeroBlock},
     ${heroBlock},
     ${faqAccordionBlock},
     ${featureCardsIconBlock},
+    ${featureSectionBlock},
+    ${ourLatestSectionBlock},
     ${subscribeNewsletterBlock},
     ${imageLinkCardsBlock}
   }
@@ -420,5 +471,19 @@ export const queryRedirects = defineQuery(`
     "source":source.current, 
     "destination":destination.current, 
     "permanent" : permanent == "true"
+  }
+`);
+// query for the feature section === test query 
+export const queryFeatureSections = defineQuery(`
+  *[_type == "featureSection"] | order(_createdAt asc) {
+    _id,
+    _type,
+    title,
+    description,
+    ${imageFragment},
+    primaryButton,
+    secondaryButton,
+    imagePosition,
+    backgroundColor
   }
 `);

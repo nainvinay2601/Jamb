@@ -10,9 +10,13 @@ import type { PageBuilderBlockTypes } from "@/types";
 import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
+import { FeatureSectionComponent } from "./sections/feature-section";
+
 import { HeroBlock } from "./sections/hero";
 import { ImageLinkCards } from "./sections/image-link-cards";
 import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
+import { OurLatestSectionComponent } from "./sections/our-latest-section";
+import { SimpleHeroComponent } from "./sections/simple-hero";
 
 // More specific and descriptive type aliases
 type PageBuilderBlock = NonNullable<
@@ -32,15 +36,17 @@ type SanityDataAttributeConfig = {
 };
 
 // Strongly typed component mapping with proper component signatures
-const BLOCK_COMPONENTS = {
+const BLOCK_COMPONENTS: Record<string, React.ComponentType<any>> = {
+  simpleHero: SimpleHeroComponent,
   cta: CTABlock,
   faqAccordion: FaqAccordion,
   hero: HeroBlock,
   featureCardsIcon: FeatureCardsWithIcon,
+  featureSection: FeatureSectionComponent,
+  ourLatestSection: OurLatestSectionComponent,
   subscribeNewsletter: SubscribeNewsletter,
   imageLinkCards: ImageLinkCards,
-  // biome-ignore lint/suspicious/noExplicitAny: <any is used to allow for dynamic component rendering>
-} as const satisfies Record<PageBuilderBlockTypes, React.ComponentType<any>>;
+};
 
 /**
  * Helper function to create consistent Sanity data attributes
@@ -118,6 +124,9 @@ function useBlockRenderer(id: string, type: string) {
 
   const renderBlock = useCallback(
     (block: PageBuilderBlock, _index: number) => {
+      // DEBUG: Log each block being rendered
+      console.log('Rendering block:', block._type, block);
+
       const Component =
         BLOCK_COMPONENTS[block._type as keyof typeof BLOCK_COMPONENTS];
 
@@ -169,7 +178,7 @@ export function PageBuilder({
 
   return (
     <main
-      className="mx-auto my-16 flex max-w-7xl flex-col gap-16"
+      className=" bg-[#f3f0ed]"
       data-sanity={containerDataAttribute}
     >
       {blocks.map(renderBlock)}

@@ -8,6 +8,9 @@ import { navbar } from "@/schemaTypes/documents/navbar";
 import { page } from "@/schemaTypes/documents/page";
 import { redirect } from "@/schemaTypes/documents/redirect";
 import { settings } from "@/schemaTypes/documents/settings";
+// import  {featureSection}  from "@/schemaTypes/documents/feature-sectionn";
+
+
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 

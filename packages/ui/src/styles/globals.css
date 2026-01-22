@@ -124,6 +124,9 @@
   body {
     @apply bg-background text-foreground;
   }
+   .font-oswald {
+    font-family: var(--font-oswald), sans-serif;
+  }
 }
 
 img {
@@ -132,5 +135,5 @@ img {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: var(--radius-md);
+  /* border-radius: var(--radius-md); */
 }

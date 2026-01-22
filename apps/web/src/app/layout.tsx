@@ -1,6 +1,6 @@
 import "@workspace/ui/globals.css";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Libre_Baskerville, Oswald } from "next/font/google";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Suspense } from "react";
@@ -13,15 +13,20 @@ import { PreviewBar } from "@/components/preview-bar";
 import { Providers } from "@/components/providers";
 import { getNavigationData } from "@/lib/navigation";
 import { SanityLive } from "@/lib/sanity/live";
+import Footer from "@/components/elements/footer";
+import { LenisScroll } from "@/components/elements/lenis-scroll";
+import { PageLoader } from "@/components/elements/page-loader";
 
-const fontSans = Geist({
+const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-serif",
+  weight: ["400", "700"],
 });
 
-const fontMono = Geist_Mono({
+const oswald = Oswald({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-oswald",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export default async function RootLayout({
@@ -34,15 +39,13 @@ export default async function RootLayout({
   const nav = await getNavigationData();
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
-      >
+      <body className={`${libreBaskerville.variable} ${oswald.variable} font-serif antialiased`}>
         <Providers>
-          <Navbar navbarData={nav.navbarData} settingsData={nav.settingsData} />
+          <PageLoader/>
+          <LenisScroll/>
+          <Navbar />
           {children}
-          <Suspense fallback={<FooterSkeleton />}>
-            <FooterServer />
-          </Suspense>
+          <Footer/>
           <SanityLive />
           <CombinedJsonLd includeOrganization includeWebsite />
           {(await draftMode()).isEnabled && (

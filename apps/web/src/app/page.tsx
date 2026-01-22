@@ -1,5 +1,6 @@
-// import { PageBuilder } from "@/components/pagebuilder";
 import { PageBuilder } from "@/components/pagebuilder";
+// import { FeatureSectionNav } from "@/components/feature-section-nav";
+import { FeatureSectionNav } from "@/components/elements/feature-section-nav";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryHomePageData } from "@/lib/sanity/query";
 import { getSEOMetadata } from "@/lib/seo";
@@ -12,28 +13,35 @@ async function fetchHomePageData() {
 
 export async function generateMetadata() {
   const { data: homePageData } = await fetchHomePageData();
+  
   return getSEOMetadata(
     homePageData
       ? {
           title: homePageData?.title ?? homePageData?.seoTitle ?? "",
           description:
             homePageData?.description ?? homePageData?.seoDescription ?? "",
-          slug: homePageData?.slug,
+          slug: homePageData?.slug ?? undefined,
           contentId: homePageData?._id,
           contentType: homePageData?._type,
         }
-      : {}
+      : undefined
   );
 }
 
 export default async function Page() {
   const { data: homePageData } = await fetchHomePageData();
 
+ 
+
   if (!homePageData) {
     return <div>No home page data</div>;
   }
 
   const { _id, _type, pageBuilder } = homePageData ?? {};
-
-  return <PageBuilder id={_id} pageBuilder={pageBuilder ?? []} type={_type} />;
+  
+  return (
+    <>
+      <PageBuilder id={_id} pageBuilder={pageBuilder ?? []} type={_type} />
+    </>
+  );
 }

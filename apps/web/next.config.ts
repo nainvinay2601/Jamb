@@ -1,9 +1,7 @@
 import "@workspace/env/client";
 import "@workspace/env/server";
-
 import { env } from "@workspace/env/client";
 import type { NextConfig } from "next";
-
 import { client } from "@/lib/sanity/client";
 import { queryRedirects } from "@/lib/sanity/query";
 
@@ -25,6 +23,9 @@ const nextConfig: NextConfig = {
         pathname: `/images/${env.NEXT_PUBLIC_SANITY_PROJECT_ID}/**`,
       },
     ],
+    // Add these to fix the IPv6 private IP warning
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
   },
   async redirects() {
     const redirects = await client.fetch(queryRedirects);
