@@ -38,7 +38,7 @@ type RichTextBlock = {
 // Flexible FAQ type that can accept different rich text structures
 type FlexibleFaq = {
   _id: string;
-  title: string;
+  title: string | null;
   richText?: RichTextBlock[] | null;
 };
 
@@ -96,7 +96,7 @@ export function FaqJsonLd({ faqs }: FaqJsonLdProps) {
     mainEntity: validFaqs.map(
       (faq): Question => ({
         "@type": "Question",
-        name: faq.title,
+        name: faq.title ?? "",
         acceptedAnswer: {
           "@type": "Answer",
           text: extractPlainTextFromRichText(faq.richText),
