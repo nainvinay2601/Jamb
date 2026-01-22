@@ -1,5 +1,15 @@
+type Link = string;
 
+type Subsection = {
+  title: string;
+  links: Link[];
+};
 
+type FooterSection = {
+  title: string;
+  links: Link[];
+  subsections?: Subsection[];
+};
 
 export default function Footer() {
   const contactInfo = [
@@ -9,7 +19,7 @@ export default function Footer() {
     "London SW1W 8PH"
   ];
 
-  const footerSections = [
+  const footerSections: FooterSection[] = [
     {
       title: "Reproduction Chimneypieces",
       links: ["Marble", "Stone", "Grates & Accessories", "Guide to Jamb Marbles"],
@@ -48,7 +58,7 @@ export default function Footer() {
     }
   ];
 
-  const LinkList = ({ links }) => (
+  const LinkList = ({ links }: { links: Link[] }) => (
     <ul className="space-y-2">
       {links.map((link, index) => (
         <li key={index}>
@@ -60,7 +70,7 @@ export default function Footer() {
     </ul>
   );
 
-  const Section = ({ title, links, subsections }) => (
+  const Section = ({ title, links, subsections }: FooterSection) => (
     <>
       <h4 className="text-[#1a1a1a] text-[16px] font-medium mb-4">
         {title}
@@ -102,13 +112,13 @@ export default function Footer() {
                 Subscribe
               </button>
             </div>
-         <label className="flex items-center gap-2 text-[#9c9c9d] text-[14px] cursor-pointer">
-  <input
-    type="checkbox"
-    className="w-4 h-4 rounded-full border-2 border-gray-400 appearance-none checked:border-blue-500 checked:bg-blue-500 cursor-pointer"
-  />
-  I agree to our Privacy Policy
-</label>
+            <label className="flex items-center gap-2 text-[#9c9c9d] text-[14px] cursor-pointer">
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded-full border-2 border-gray-400 appearance-none checked:border-blue-500 checked:bg-blue-500 cursor-pointer"
+              />
+              I agree to our Privacy Policy
+            </label>
           </div>
         </div>
 
