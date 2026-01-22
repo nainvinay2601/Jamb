@@ -186,6 +186,7 @@ const featureSectionBlock = /* groq */ `
   _type == "featureSection" => {
     _type,
     _key,
+    subheading,
     title,
     description,
     ${imageFragment},
@@ -201,6 +202,7 @@ const featureSectionBlock = /* groq */ `
     backgroundColor
   }
 `;
+
 
 // ================ 
 const ourLatestSectionBlock = /* groq */ `
@@ -478,6 +480,7 @@ export const queryFeatureSections = defineQuery(`
   *[_type == "featureSection"] | order(_createdAt asc) {
     _id,
     _type,
+    subheading,
     title,
     description,
     ${imageFragment},
