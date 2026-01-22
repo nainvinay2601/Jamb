@@ -140,7 +140,8 @@ export function ArticleJsonLd({
 
   const baseUrl = getBaseUrl();
   const articleUrl = `${baseUrl}${article.slug}`;
-  #const imageUrl = buildSafeImageUrl(article.image ?? undefined);
+  const imageUrl = buildSafeImageUrl(article.image ?? undefined);
+
 
   const articleJsonLd: WithContext<Article> = {
     "@context": "https://schema.org",
