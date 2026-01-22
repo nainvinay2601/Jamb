@@ -142,12 +142,11 @@ export function ArticleJsonLd({
   const articleUrl = `${baseUrl}${article.slug}`;
   const imageUrl = buildSafeImageUrl(article.image ?? undefined);
 
-
   const articleJsonLd: WithContext<Article> = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
-    description: article.description || undefined,
+    description: article.description ?? undefined,
     image: imageUrl ? [imageUrl] : undefined,
     author: article.authors
       ? [
@@ -166,7 +165,7 @@ export function ArticleJsonLd({
       : [],
     publisher: {
       "@type": "Organization",
-      name: settings?.siteTitle || "Website",
+      name: settings?.siteTitle ?? "Website",
       logo: settings?.logo
         ? ({
             "@type": "ImageObject",
@@ -211,8 +210,8 @@ export function OrganizationJsonLd({ settings }: OrganizationJsonLdProps) {
   const organizationJsonLd: WithContext<Organization> = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: settings.siteTitle,
-    description: settings.siteDescription || undefined,
+    name: settings.siteTitle ?? undefined,
+    description: settings.siteDescription ?? undefined,
     url: baseUrl,
     logo: settings.logo
       ? ({
@@ -248,12 +247,12 @@ export function WebSiteJsonLd({ settings }: WebSiteJsonLdProps) {
   const websiteJsonLd: WithContext<WebSite> = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: settings.siteTitle,
-    description: settings.siteDescription || undefined,
+    name: settings.siteTitle ?? undefined,
+    description: settings.siteDescription ?? undefined,
     url: baseUrl,
     publisher: {
       "@type": "Organization",
-      name: settings.siteTitle,
+      name: settings.siteTitle ?? undefined,
     } as Organization,
   };
 
