@@ -23,17 +23,18 @@ const nextConfig: NextConfig = {
         pathname: `/images/${env.NEXT_PUBLIC_SANITY_PROJECT_ID}/**`,
       },
     ],
-    // Add these to fix the IPv6 private IP warning
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
   },
   async redirects() {
     const redirects = await client.fetch(queryRedirects);
-    return redirects.map((redirect) => ({
-      source: redirect.source,
-      destination: redirect.destination,
-      permanent: redirect.permanent ?? false,
-    }));
+    return redirects
+      .filter((redirect) => redirect.source && redirect.destination)
+      .map((redirect) => ({
+        source: redirect.source!,
+        destination: redirect.destination!,
+        permanent: redirect.permanent ?? false,
+      }));
   },
 };
 
