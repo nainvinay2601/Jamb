@@ -6,7 +6,6 @@ import { structureTool } from "sanity/structure";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { lucideIconPicker } from "sanity-plugin-lucide-icon-picker";
 import { media } from "sanity-plugin-media";
-
 import { Logo } from "./components/logo";
 import { locations } from "./location";
 import { presentationUrl } from "./plugins/presentation-url";
